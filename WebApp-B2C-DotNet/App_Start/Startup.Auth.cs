@@ -81,12 +81,15 @@ namespace WebApp_OpenIDConnect_DotNet_B2C
             PolicyConfigurationManager mgr = notification.Options.ConfigurationManager as PolicyConfigurationManager;
             if (notification.ProtocolMessage.RequestType == OpenIdConnectRequestType.LogoutRequest)
             {
-                OpenIdConnectConfiguration config = await mgr.GetConfigurationByPolicyAsync(CancellationToken.None, notification.OwinContext.Authentication.AuthenticationResponseRevoke.Properties.Dictionary[Startup.PolicyKey]);
+                OpenIdConnectConfiguration config = await mgr.GetConfigurationByPolicyAsync(CancellationToken.None, 
+                    notification.OwinContext.Authentication.AuthenticationResponseRevoke.Properties.Dictionary[Startup.PolicyKey]);
                 notification.ProtocolMessage.IssuerAddress = config.EndSessionEndpoint;
             }
             else
             {
-                OpenIdConnectConfiguration config = await mgr.GetConfigurationByPolicyAsync(CancellationToken.None, notification.OwinContext.Authentication.AuthenticationResponseChallenge.Properties.Dictionary[Startup.PolicyKey]);
+                OpenIdConnectConfiguration config = await mgr.GetConfigurationByPolicyAsync(
+                    CancellationToken.None, 
+                    notification.OwinContext.Authentication.AuthenticationResponseChallenge.Properties.Dictionary[Startup.PolicyKey]);
                 notification.ProtocolMessage.IssuerAddress = config.AuthorizationEndpoint;
             }
         }

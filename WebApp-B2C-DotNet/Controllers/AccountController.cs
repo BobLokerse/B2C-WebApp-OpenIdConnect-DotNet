@@ -79,5 +79,5 @@ namespace WebApp_OpenIDConnect_DotNet_B2C.Controllers
                         {Startup.PolicyKey, ClaimsPrincipal.Current.FindFirst(Startup.AcrClaimType).Value}
                     }), OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
         }
-	}
+    }
 }
